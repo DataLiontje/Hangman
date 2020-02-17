@@ -75,6 +75,7 @@ namespace Galgje
                     Console.Clear();
                     Console.WriteLine("Je hebt verloren!\nHet woord was: "+new String(word));
                     Console.ReadLine();
+                    Raad();
                    
                 }
             }
