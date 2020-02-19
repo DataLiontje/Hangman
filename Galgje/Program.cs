@@ -43,7 +43,7 @@ namespace Galgje
 
         public static void Raad()
         {
-            Console.WriteLine("Raad letter voor letter: [nog "+chances.ToString()+" kansen]");
+            Console.WriteLine("Guess a character: ["+chances.ToString()+" chances left]");
             Console.WriteLine(new String(guessed));
             
             String input = Console.ReadLine();
@@ -56,8 +56,8 @@ namespace Galgje
             if (input.ToLower().Equals("stop"))
             {
                 Console.Clear();
-                Console.WriteLine("Gestopt met raden!");
-                Console.WriteLine("Het woord was: " + new String(word));
+                Console.WriteLine("You gave up!");
+                Console.WriteLine("The word was: " + new String(word));
                 return;
             }
 
@@ -87,26 +87,30 @@ namespace Galgje
                 if (chances.Equals(0))
                 {
                     Console.Clear();
-                    Console.WriteLine("Je hebt verloren!\nHet woord was: "+new String(word));
+                    Console.WriteLine("You lost!\nThe word was: "+new String(word));
                     Console.ReadLine();
                     return;
                    
                 }
             }
 
+
             
+            //CHECK IF STRING IS SAME
             if (!new String(word).ToLower().Equals(new String(guessed).ToLower()))
             {
+
+                //INCREMENT GUESSTIMES
+                guesstimes++;
 
 
                 Console.Clear();
                 Raad();
             }
             else
-            {
-               
+            {               
                 Console.Clear();
-                Console.WriteLine("Je hebt t geraden!!");
+                Console.WriteLine("You guessed it in "+guesstimes+" times!!");
                 Console.WriteLine(new String(word));
                 Console.ReadLine();
 
