@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Galgje
 {
@@ -10,6 +11,7 @@ namespace Galgje
         public static Char[] guessed = new char[100];
         public static int chances = 5;
         public static int guesstimes = 0;
+        public static int tips = 3;
 
         static void Main()
         {
@@ -20,16 +22,16 @@ namespace Galgje
             //DEFINE LENGTH OF CHAR ARRAYS
             word = new Char[randomWordArray.Length];
             guessed = new Char[randomWordArray.Length];
-            
-            
+
+
             //DEFINE CHAR ARRAY
             word = randomWordArray;
 
-           
+
 
 
             //DEFINE GUESSED CHAR ARRAY TO STARS
-            for (int i=0;i<word.Length;i++)
+            for (int i = 0; i < word.Length; i++)
             {
                 guessed[i] = '*';
             }
@@ -43,9 +45,9 @@ namespace Galgje
 
         public static void Raad()
         {
-            Console.WriteLine("Guess a character: ["+chances.ToString()+" chances left]");
+            Console.WriteLine("Guess a character: [" + chances.ToString() + " chances left]");
             Console.WriteLine(new String(guessed));
-            
+
             String input = Console.ReadLine();
             if (string.IsNullOrEmpty(input))
             {
@@ -58,6 +60,29 @@ namespace Galgje
                 Console.Clear();
                 Console.WriteLine("You gave up!");
                 Console.WriteLine("The word was: " + new String(word));
+                return;
+            }
+            if (input.ToLower().Equals("tip"))
+            {
+                if (tips > 0)
+                {
+
+
+                    Console.Clear();
+                    String[] tip = GetTip();
+                    tips--;
+                    Console.WriteLine("Your hint is: "+ tip[0]+" at position: "+tip[1]+" [ "+tips+" tips left ]");
+                    
+                }
+                else
+                {
+                    Console.WriteLine("You don't have any hints left!");
+                    
+                }
+                Console.WriteLine("Press a key to continue...");
+                Console.ReadLine();
+                Console.Clear();
+                Raad();
                 return;
             }
 
@@ -87,15 +112,15 @@ namespace Galgje
                 if (chances.Equals(0))
                 {
                     Console.Clear();
-                    Console.WriteLine("You lost!\nThe word was: "+new String(word));
+                    Console.WriteLine("You lost!\nThe word was: " + new String(word));
                     Console.ReadLine();
                     return;
-                   
+
                 }
             }
 
 
-            
+
             //CHECK IF STRING IS SAME
             if (!new String(word).ToLower().Equals(new String(guessed).ToLower()))
             {
@@ -108,9 +133,9 @@ namespace Galgje
                 Raad();
             }
             else
-            {               
+            {
                 Console.Clear();
-                Console.WriteLine("You guessed it in "+guesstimes+" times!!");
+                Console.WriteLine("You guessed it in " + guesstimes + " times!!");
                 Console.WriteLine(new String(word));
                 Console.ReadLine();
 
@@ -131,5 +156,44 @@ namespace Galgje
 
         }
 
+
+        public static String[] GetTip()
+        {
+            List<String[]> notGuessed = new List<String[]>();
+            int wordIndex = 0;
+            foreach (Char x in guessed)
+            {
+
+                Console.WriteLine(x);
+                
+                if (x.Equals('*'))
+                {
+                    String[] stringArrayThing = new String[2] { word[wordIndex].ToString(), (wordIndex + 1).ToString() };
+
+                    notGuessed.Add(stringArrayThing);
+
+                }
+                wordIndex++;
+
+            }
+            Random rnd = new Random();
+            String[][] notGuessedArray = notGuessed.ToArray();
+            String[] tip = notGuessedArray[rnd.Next( 0, (notGuessedArray.Length -1))];
+
+            return tip;
+
+
+        }
+
+
+
+
     }
+
+     public class TipPosition
+    {
+        public Char tipCharacter { get; set; }
+        public int tipPosition { get; set; }
+    }
+
 }
