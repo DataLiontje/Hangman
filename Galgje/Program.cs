@@ -158,8 +158,8 @@ namespace Galgje
 
         public static String GetRandomWord()
         {
-            String[] words = { "Test1", "Test2" };
-           // String[] words = { "day", "violin", "snow", "yardstick", "carousel", "watering", "can", "drink", "music", "solar", "system", "homeless", "thumb", "class", "bell", "pepper", "rocking", "chair", "toilet", "paper", "dig", "cave", "gum", "salt", "and", "pepper", "restaurant", "root", "weight", "free", "gingerbread", "man", "mini", "blinds", "toothbrush", "pinecone", "hunter", "ink", "loaf", "melt", "present", "waterfall", "zebra", "dump", "truck", "lucky", "soccer", "Jupiter", "hot", "dog", "goose", "reindeer", "dominoes", "tennis", "teapot", "swing", "birthday", "cake", "sleep", "lake", "front", "porch", "pirate" };
+            // String[] words = { "Test1", "Test2" };
+            String[] words = { "day", "violin", "snow", "yardstick", "carousel", "watering", "can", "drink", "music", "solar", "system", "homeless", "thumb", "class", "bell", "pepper", "rocking", "chair", "toilet", "paper", "dig", "cave", "gum", "salt", "and", "pepper", "restaurant", "root", "weight", "free", "gingerbread", "man", "mini", "blinds", "toothbrush", "pinecone", "hunter", "ink", "loaf", "melt", "present", "waterfall", "zebra", "dump", "truck", "lucky", "soccer", "Jupiter", "hot", "dog", "goose", "reindeer", "dominoes", "tennis", "teapot", "swing", "birthday", "cake", "sleep", "lake", "front", "porch", "pirate" };
             Random rnd = new Random();
 
             return words[rnd.Next(0, (words.Length - 1))];
