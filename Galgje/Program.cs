@@ -45,6 +45,7 @@ namespace Galgje
 
         public static void Raad()
         {
+            Console.Title = "[Hangman Game] [ Guessed "+guesstimes+" times ] ["+tips+" tips left] [Commands: /tip to get a tip & /stop to stop the game]";
             Console.WriteLine("Guess a character: [" + chances.ToString() + " chances left]");
             Console.WriteLine(new String(guessed));
 
@@ -55,14 +56,14 @@ namespace Galgje
                 Raad();
                 return;
             }
-            if (input.ToLower().Equals("stop"))
+            if (input.ToLower().Equals("/stop"))
             {
                 Console.Clear();
                 Console.WriteLine("You gave up!");
                 Console.WriteLine("The word was: " + new String(word));
                 return;
             }
-            if (input.ToLower().Equals("tip"))
+            if (input.ToLower().Equals("/tip"))
             {
                 if (tips > 0)
                 {
@@ -87,10 +88,16 @@ namespace Galgje
             }
 
             Char character = input.ToCharArray()[0];
+
+
+            //INCREMENT GUESSTIMES
             guesstimes++;
+            
+            
 
             int index = 0;
             bool got = false;
+
             foreach (Char x in word)
             {
                 if (x.ToString().ToLower().Equals(character.ToString().ToLower()))
@@ -125,8 +132,7 @@ namespace Galgje
             if (!new String(word).ToLower().Equals(new String(guessed).ToLower()))
             {
 
-                //INCREMENT GUESSTIMES
-                guesstimes++;
+               
 
 
                 Console.Clear();
@@ -134,10 +140,12 @@ namespace Galgje
             }
             else
             {
+                Console.Title = "[Hangman Game] [ Guessed " + guesstimes + " times ] [" + tips + " tips left] [Commands: /tip to get a tip & /stop to stop the game]";
+
                 Console.Clear();
                 Console.WriteLine("You guessed it in " + guesstimes + " times!!");
                 Console.WriteLine(new String(word));
-                Console.ReadLine();
+                Console.ReadKey();
 
             }
 
@@ -147,9 +155,11 @@ namespace Galgje
 
 
 
+
         public static String GetRandomWord()
         {
-            String[] words = { "day", "violin", "snow", "yardstick", "carousel", "watering", "can", "drink", "music", "solar", "system", "homeless", "thumb", "class", "bell", "pepper", "rocking", "chair", "toilet", "paper", "dig", "cave", "gum", "salt", "and", "pepper", "restaurant", "root", "weight", "free", "gingerbread", "man", "mini", "blinds", "toothbrush", "pinecone", "hunter", "ink", "loaf", "melt", "present", "waterfall", "zebra", "dump", "truck", "lucky", "soccer", "Jupiter", "hot", "dog", "goose", "reindeer", "dominoes", "tennis", "teapot", "swing", "birthday", "cake", "sleep", "lake", "front", "porch", "pirate" };
+            String[] words = { "Test1", "Test2" };
+           // String[] words = { "day", "violin", "snow", "yardstick", "carousel", "watering", "can", "drink", "music", "solar", "system", "homeless", "thumb", "class", "bell", "pepper", "rocking", "chair", "toilet", "paper", "dig", "cave", "gum", "salt", "and", "pepper", "restaurant", "root", "weight", "free", "gingerbread", "man", "mini", "blinds", "toothbrush", "pinecone", "hunter", "ink", "loaf", "melt", "present", "waterfall", "zebra", "dump", "truck", "lucky", "soccer", "Jupiter", "hot", "dog", "goose", "reindeer", "dominoes", "tennis", "teapot", "swing", "birthday", "cake", "sleep", "lake", "front", "porch", "pirate" };
             Random rnd = new Random();
 
             return words[rnd.Next(0, (words.Length - 1))];
@@ -164,7 +174,7 @@ namespace Galgje
             foreach (Char x in guessed)
             {
 
-                Console.WriteLine(x);
+                
                 
                 if (x.Equals('*'))
                 {
@@ -190,10 +200,5 @@ namespace Galgje
 
     }
 
-     public class TipPosition
-    {
-        public Char tipCharacter { get; set; }
-        public int tipPosition { get; set; }
-    }
 
 }
